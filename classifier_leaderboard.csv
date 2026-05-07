@@ -1,0 +1,10 @@
+Species,Model Architecture,Accuracy,Precision,Recall
+Dog,ResNet50 (Deep Learning),89.6,90.4,89.6
+Dog,Logistic Regression (Orange),74.6,74.5,74.6
+Dog,Support Vector Machine (Orange),73.7,74.0,73.7
+Dog,Random Forest (Orange),45.1,44.4,45.1
+Cat,ResNet50 (Deep Learning),89.7,91.7,89.7
+Cat,Logistic Regression (Orange),87.7,87.7,87.7
+Cat,Support Vector Machine (Orange),85.3,85.5,85.3
+Cat,Random Forest (Orange),73.8,75.5,73.8
+

@@ -1,0 +1,7 @@
+Species,Augmentation Method,SSIM (Structure),Histogram (Lighting),Cosine Sim (Deep Features)
+Dog,Rotation (30°),0.2831,0.5103,0.9354
+Dog,Color Jitter,0.9530,0.6326,0.9939
+Dog,Gaussian Blur,0.8017,0.9853,0.9502
+Cat,Rotation (30°),0.3235,0.4692,0.8510
+Cat,Color Jitter,0.9375,0.3388,0.9845
+Cat,Gaussian Blur,0.8724,0.9698,0.8831

@@ -1,0 +1,9 @@
+Species,Classifier,Train Acc (Baseline),Test Acc (Baseline),Train Acc (Combined),Test Acc (Combined)
+Dog,Random Forest,98.5%,85.0%,95.2%,90.5%
+Dog,Logistic Regression,99.1%,88.2%,96%,92.1%
+Dog,SVM,94.3%,80.1%,91.5%,82.4%
+Dog,ResNet50,99.5%,92.9%,98.1%,96.5%
+Cat,ResNet50,96.2%,78.8%,94%,89.7%
+Cat,Logistic Regression,85%,76.2%,100%,87.7%
+Cat,Random Forest,79.5%,70.1%,99.5%,73.8%
+Cat,Support Vector Machine,83.1%,74.8%,99%,85.3%

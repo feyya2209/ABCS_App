@@ -1,0 +1,7 @@
+Model Architecture,Accuracy,Precision,Recall,Inference Speed
+ResNet50 (Deep Learning),89.6,90.4,89.6,Slow (~120ms)
+Logistic Regression (Orange),74.6,74.5,74.6,Instant (~5ms)
+Support Vector Machine (Orange),73.7,74.0,73.7,Instant (~8ms)
+Neural Network (Orange),72.4,72.4,72.4,Fast (~45ms)
+kNN (Orange),60.3,62.0,60.3,Instant (~12ms)
+Random Forest (Orange),45.1,44.4,45.1,Instant (~15ms)
