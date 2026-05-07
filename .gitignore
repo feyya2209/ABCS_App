@@ -194,3 +194,4 @@ dataset_original.zip
 # EXCEPT the background
 !background.jpg
 !*.pth
+!*.csv
