@@ -186,6 +186,11 @@ combined_dogs/
 combined_cats/
 1_Baseline DOG/
 dataset_original.zip
+# Ignore all images
 *.jpg
 *.png
 *.jpeg
+
+# EXCEPT the background
+!background.jpg
+!*.pth

@@ -350,7 +350,7 @@ if choice == "Prediction":
                         # --- 3. 🟢 ROUTE TO THE CORRECT MODEL FILE ---
                         if "Dog" in species_choice:
                             # Use your Dog weights
-                            model = load_resnet_model("Dog", "resnet_dog.pth")
+                            model = load_resnet_model("Dog", "resnet_abcs_final.pth")
                             
                         elif "Cat" in species_choice:
                             # 🐱 ACTIVATE CATS: Use your new resnet_cat.pth!
@@ -433,7 +433,7 @@ elif choice == "Sanity Check":
                         # --- 4. 🟢 ROUTE TO THE CORRECT EXPERT MODEL ---
                         if "Dog" in species_choice:
                             # Assuming your dog model is named 'resnet_dog.pth'
-                            model = load_resnet_model("Dog", "resnet_dog.pth")
+                            model = load_resnet_model("Dog", "resnet_abcs_final.pth")
                             
                         elif "Cat" in species_choice:
                             # 🐱 Using your specific file name!
