@@ -8,4 +8,4 @@ scikit-image
 opencv-python-headless
 scipy
 altair
-scikit-learn
+scikit-learn 
