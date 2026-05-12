@@ -228,7 +228,7 @@ def get_augmentation_pipeline():
 
 # --- CONSTANTS ---
 DOG_CLASSES = ['Afghan', 'African wild dog','Airedale','American Hairless','American Spaniel','Basenji','Basset','Beagle','Bearded Collie','Bermaise','Bichon Frise','Blenheim','Bloodhound','Bluetick','Border Collie','Borzoi','Boston Terrier','Boxer','Bull Mastiff','Bull Terrier','Bulldog','Cairn','Chihuahua','Chinese Crested','Chow','Clumber','Cockapoo','Cocker','Collie','Corgi','Coyote','Dalmation','Dhole','Dingo','Doberman','Elk Hound','French Bulldog','German Sheperd','Golden Retriever','Great Dane','Great Perenees','Greyhound','Groenendael','Irish Spaniel','Irish Wolfhound','Japanese Spaniel','Komondor','Labradoodle','Labrador','Lhasa','Malinois','Maltese','Mex Hairless','Newfoundland','Pekinese','Pit Bull','Pomeranian','Poodle','Pug','Rhodesian','Rottweiler','Saint Bernard','Schnauzer','Scotch Terrier','Shar_Pei', 'Shiba Inu','Shih-Tzu', 'Siberian husky','Vizsla','Yorkie'] 
-CAT_CLASSES = ["American Short Hair", "Bengal", "Maine Coon", "Ragdoll", "Scottish Fold", "Sphinx"]
+CAT_CLASSES = ["Abyssinian","American Bobtail","American Curl","American Shorthair","American Wirehair","Applehead Siamese","Balinese","Bengal","Birman","Bombay","British Shorthair","Burmese","Burmilla","Calico","Canadian Hairless","Chartreux","Chausie","Chinchilla","Cornish Rex","Cymric","Devon Rex","Dilute Calico","Dilute Tortoiseshell","Domestic Long Hair","Domestic Medium Hair","Domestic Short Hair","Egyptian Mau", "Exotic Shorthair", "Extra-Toes Cat - Hemingway Polydactyl","Havana","Himalayan","Japanese Bobtail","Javanese","Korat", "LaPerm","Maine Coon","Manx","Munchkin","Nebelung","Norwegian Forest Cat","Ocicat","Oriental Long Hair","Oriental Short Hair","Oriental Tabby","Persian","Pixiebob","Ragamuffin","Ragdoll","Russian Blue","Scottish Fold","Selkirk Rex","Siamese","Siberian","Silver","Singapura","Snowshoe","Somali","Sphynx - Hairless Cat","Tabby","Tiger","Tonkinese","Torbie","Tortoiseshell","Turkish Angora","Turkish Van","Tuxedo","York Chocolate"] # Your exact cat folders
 
 CLASS_NAMES = DOG_CLASSES + CAT_CLASSES
 
@@ -267,7 +267,7 @@ def process_and_predict(image, model, species):
     # 1. Define your specific label lists
     # Ensure these match the alphabetical order of your training folders!
     dog_labels = DOG_CLASSES # Uses the list you defined earlier
-    cat_labels = ["American Short Hair", "Bengal", "Maine Coon", "Ragdoll", "Scottish Fold", "Sphinx"]
+    cat_labels = CAT_CLASSES # Uses the list you defined earlier
 
     # 2. Pick the right label list
     if "Cat" in species:
@@ -353,7 +353,7 @@ if choice == "Prediction":
                             
                         elif "Cat" in species_choice:
                             # 🐱 ACTIVATE CATS: Use your new resnet_cat.pth!
-                            model = load_resnet_model("Cat", "resnet_cat.pth")
+                            model = load_resnet_model("Cat", "resnet_cat67_original.pth")
                             
                         elif "Bird" in species_choice:
                             st.warning("🐦 Bird Expert Model is currently in training.")
@@ -476,8 +476,8 @@ elif choice == "Data Augmentation":
             combined_folder = "combined_dogs"
             
         elif "Cat" in species_choice:
-            breeds = ["American Short Hair", "Bengal", "Maine Coon", "Ragdoll", "Scottish Fold", "Sphinx"] # Your exact cat folders
-            animal_folder = "dataset_cats"
+            breeds = ["Abyssinian","American Bobtail","American Curl","American Shorthair","American Wirehair","Applehead Siamese","Balinese","Bengal","Birman","Bombay","British Shorthair","Burmese","Burmilla","Calico","Canadian Hairless","Chartreux","Chausie","Chinchilla","Cornish Rex","Cymric","Devon Rex","Dilute Calico","Dilute Tortoiseshell","Domestic Long Hair","Domestic Medium Hair","Domestic Short Hair","Egyptian Mau", "Exotic Shorthair", "Extra-Toes Cat - Hemingway Polydactyl","Havana","Himalayan","Japanese Bobtail","Javanese","Korat", "LaPerm","Maine Coon","Manx","Munchkin","Nebelung","Norwegian Forest Cat","Ocicat","Oriental Long Hair","Oriental Short Hair","Oriental Tabby","Persian","Pixiebob","Ragamuffin","Ragdoll","Russian Blue","Scottish Fold","Selkirk Rex","Siamese","Siberian","Silver","Singapura","Snowshoe","Somali","Sphynx - Hairless Cat","Tabby","Tiger","Tonkinese","Torbie","Tortoiseshell","Turkish Angora","Turkish Van","Tuxedo","York Chocolate"] # Your exact cat folders
+            animal_folder = "dataset_catnew"
             combined_folder = "combined_cats"
             
         else:
