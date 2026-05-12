@@ -18,21 +18,18 @@ import random
 import torchvision.transforms as T
 from skimage.metrics import structural_similarity as ssim
 
-MODEL_PATH = 'resnet_cat67_original.pth'
 # 🟢 Add @st.cache_resource so the model stays in memory and doesn't reload!
 @st.cache_resource
-
 def load_resnet_model(species, model_path):
     model = models.resnet50(weights=None)
     num_ftrs = model.fc.in_features
     
-    if species == "Cat":
-        num_classes = 6
-    else:
-        num_classes = 70
+    # 🟢 Update the numbers here to match your new models
+    if "Cat" in species:
+        model.fc = nn.Linear(num_ftrs, 67) # Now handles 67 cat breeds
+    elif "Dog" in species:
+        model.fc = nn.Linear(num_ftrs, 70) # Now handles 70 dog breeds
         
-    model.fc = nn.Linear(num_ftrs, num_classes)
-    
     # Use map_location to ensure it runs on your laptop CPU
     model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     model.eval()
@@ -231,21 +228,8 @@ def get_augmentation_pipeline():
 
 # --- CONSTANTS ---
 DOG_CLASSES = ['Afghan', 'African wild dog','Airedale','American Hairless','American Spaniel','Basenji','Basset','Beagle','Bearded Collie','Bermaise','Bichon Frise','Blenheim','Bloodhound','Bluetick','Border Collie','Borzoi','Boston Terrier','Boxer','Bull Mastiff','Bull Terrier','Bulldog','Cairn','Chihuahua','Chinese Crested','Chow','Clumber','Cockapoo','Cocker','Collie','Corgi','Coyote','Dalmation','Dhole','Dingo','Doberman','Elk Hound','French Bulldog','German Sheperd','Golden Retriever','Great Dane','Great Perenees','Greyhound','Groenendael','Irish Spaniel','Irish Wolfhound','Japanese Spaniel','Komondor','Labradoodle','Labrador','Lhasa','Malinois','Maltese','Mex Hairless','Newfoundland','Pekinese','Pit Bull','Pomeranian','Poodle','Pug','Rhodesian','Rottweiler','Saint Bernard','Schnauzer','Scotch Terrier','Shar_Pei', 'Shiba Inu','Shih-Tzu', 'Siberian husky','Vizsla','Yorkie'] 
-CAT_CLASSES = ["Abyssinian","American Bobtail","American Curl","American Shorthair","American Wirehair","Applehead Siamese","Balinese","Bengal","Birman","Bombay","British Shorthair","Burmese","Burmilla",
-    "Calico",
-    "Canadian Hairless",
-    "Chartreux",
-    "Chausie",
-    "Chinchilla",
-    "Cornish Rex",
-    "Cymric",
-    "Devon Rex",
-    "Dilute Calico",
-    "Dilute Tortoiseshell",
-    "Domestic Long Hair",
-    "Domestic Medium Hair",
-    "Domestic Short Hair",
-]
+CAT_CLASSES = ["American Short Hair", "Bengal", "Maine Coon", "Ragdoll", "Scottish Fold", "Sphinx"]
+
 CLASS_NAMES = DOG_CLASSES + CAT_CLASSES
 
 # --- ML FUNCTIONS ---
@@ -283,7 +267,7 @@ def process_and_predict(image, model, species):
     # 1. Define your specific label lists
     # Ensure these match the alphabetical order of your training folders!
     dog_labels = DOG_CLASSES # Uses the list you defined earlier
-    cat_labels = CAT_CLASSES
+    cat_labels = ["American Short Hair", "Bengal", "Maine Coon", "Ragdoll", "Scottish Fold", "Sphinx"]
 
     # 2. Pick the right label list
     if "Cat" in species:
@@ -368,8 +352,8 @@ if choice == "Prediction":
                             model = load_resnet_model("Dog", "resnet_abcs_final.pth")
                             
                         elif "Cat" in species_choice:
-                            # 🐱 ACTIVATE CATS: Use your new resnet_cat67_original.pth!
-                            model = load_resnet_model("Cat", "resnet_cat67_original.pth")
+                            # 🐱 ACTIVATE CATS: Use your new resnet_cat.pth!
+                            model = load_resnet_model("Cat", "resnet_cat.pth")
                             
                         elif "Bird" in species_choice:
                             st.warning("🐦 Bird Expert Model is currently in training.")
@@ -452,7 +436,7 @@ elif choice == "Sanity Check":
                             
                         elif "Cat" in species_choice:
                             # 🐱 Using your specific file name!
-                            model = load_resnet_model("Cat", "resnet_cat67_original.pth")
+                            model = load_resnet_model("Cat", "resnet_cat.pth")
                             
                         elif "Bird" in species_choice:
                             st.warning("🐦 Bird Expert Model is currently in training.")
@@ -470,7 +454,7 @@ elif choice == "Sanity Check":
                                 
                     except Exception as e:
                         st.error(f"Sanity Check Failed. Error: {e}")
-                        st.info("Tip: Ensure 'resnet_cat67_original.pth' is in your app folder.")
+                        st.info("Tip: Ensure 'resnet_cat.pth' is in your app folder.")
                         
 # ==========================================
 # PAGE: DATA AUGMENTATION & QA FILTER
@@ -487,7 +471,7 @@ elif choice == "Data Augmentation":
     with col2:
         # 🚦 THE ROUTER: This points the code to the exact correct folders!
         if "Dog" in species_choice:
-            breeds = ['Afghan', 'African wild dog', 'Airedale', 'Basenji', 'Beagle'] # (Keep your full list of 70 here!)
+            breeds = ['Afghan', 'African wild dog','Airedale','American Hairless','American Spaniel','Basenji','Basset','Beagle','Bearded Collie','Bermaise','Bichon Frise','Blenheim','Bloodhound','Bluetick','Border Collie','Borzoi','Boston Terrier','Boxer','Bull Mastiff','Bull Terrier','Bulldog','Cairn','Chihuahua','Chinese Crested','Chow','Clumber','Cockapoo','Cocker','Collie','Corgi','Coyote','Dalmation','Dhole','Dingo','Doberman','Elk Hound','French Bulldog','German Sheperd','Golden Retriever','Great Dane','Great Perenees','Greyhound','Groenendael','Irish Spaniel','Irish Wolfhound','Japanese Spaniel','Komondor','Labradoodle','Labrador','Lhasa','Malinois','Maltese','Mex Hairless','Newfoundland','Pekinese','Pit Bull','Pomeranian','Poodle','Pug','Rhodesian','Rottweiler','Saint Bernard','Schnauzer','Scotch Terrier','Shar_Pei', 'Shiba Inu','Shih-Tzu', 'Siberian husky','Vizsla','Yorkie'] 
             animal_folder = "dataset_dogs"
             combined_folder = "combined_dogs"
             
