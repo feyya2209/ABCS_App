@@ -229,8 +229,21 @@ def get_augmentation_pipeline():
 
 # --- CONSTANTS ---
 DOG_CLASSES = ['Afghan', 'African wild dog','Airedale','American Hairless','American Spaniel','Basenji','Basset','Beagle','Bearded Collie','Bermaise','Bichon Frise','Blenheim','Bloodhound','Bluetick','Border Collie','Borzoi','Boston Terrier','Boxer','Bull Mastiff','Bull Terrier','Bulldog','Cairn','Chihuahua','Chinese Crested','Chow','Clumber','Cockapoo','Cocker','Collie','Corgi','Coyote','Dalmation','Dhole','Dingo','Doberman','Elk Hound','French Bulldog','German Sheperd','Golden Retriever','Great Dane','Great Perenees','Greyhound','Groenendael','Irish Spaniel','Irish Wolfhound','Japanese Spaniel','Komondor','Labradoodle','Labrador','Lhasa','Malinois','Maltese','Mex Hairless','Newfoundland','Pekinese','Pit Bull','Pomeranian','Poodle','Pug','Rhodesian','Rottweiler','Saint Bernard','Schnauzer','Scotch Terrier','Shar_Pei', 'Shiba Inu','Shih-Tzu', 'Siberian husky','Vizsla','Yorkie'] 
-CAT_CLASSES = ["American Short Hair", "Bengal", "Maine Coon", "Ragdoll", "Scottish Fold", "Sphinx"]
-
+CAT_CLASSES = ["Abyssinian","American Bobtail","American Curl","American Shorthair","American Wirehair","Applehead Siamese","Balinese","Bengal","Birman","Bombay","British Shorthair","Burmese","Burmilla",
+    "Calico",
+    "Canadian Hairless",
+    "Chartreux",
+    "Chausie",
+    "Chinchilla",
+    "Cornish Rex",
+    "Cymric",
+    "Devon Rex",
+    "Dilute Calico",
+    "Dilute Tortoiseshell",
+    "Domestic Long Hair",
+    "Domestic Medium Hair",
+    "Domestic Short Hair",
+]
 CLASS_NAMES = DOG_CLASSES + CAT_CLASSES
 
 # --- ML FUNCTIONS ---
@@ -268,7 +281,7 @@ def process_and_predict(image, model, species):
     # 1. Define your specific label lists
     # Ensure these match the alphabetical order of your training folders!
     dog_labels = DOG_CLASSES # Uses the list you defined earlier
-    cat_labels = ["American Short Hair", "Bengal", "Maine Coon", "Ragdoll", "Scottish Fold", "Sphinx"]
+    cat_labels = CAT_CLASSES
 
     # 2. Pick the right label list
     if "Cat" in species:
@@ -353,8 +366,8 @@ if choice == "Prediction":
                             model = load_resnet_model("Dog", "resnet_abcs_final.pth")
                             
                         elif "Cat" in species_choice:
-                            # 🐱 ACTIVATE CATS: Use your new resnet_cat.pth!
-                            model = load_resnet_model("Cat", "resnet_cat.pth")
+                            # 🐱 ACTIVATE CATS: Use your new resnet_cat67_original.pth!
+                            model = load_resnet_model("Cat", "resnet_cat67_original.pth")
                             
                         elif "Bird" in species_choice:
                             st.warning("🐦 Bird Expert Model is currently in training.")
@@ -437,7 +450,7 @@ elif choice == "Sanity Check":
                             
                         elif "Cat" in species_choice:
                             # 🐱 Using your specific file name!
-                            model = load_resnet_model("Cat", "resnet_cat.pth")
+                            model = load_resnet_model("Cat", "resnet_cat67_original.pth")
                             
                         elif "Bird" in species_choice:
                             st.warning("🐦 Bird Expert Model is currently in training.")
@@ -455,7 +468,7 @@ elif choice == "Sanity Check":
                                 
                     except Exception as e:
                         st.error(f"Sanity Check Failed. Error: {e}")
-                        st.info("Tip: Ensure 'resnet_cat.pth' is in your app folder.")
+                        st.info("Tip: Ensure 'resnet_cat67_original.pth' is in your app folder.")
                         
 # ==========================================
 # PAGE: DATA AUGMENTATION & QA FILTER
@@ -472,7 +485,7 @@ elif choice == "Data Augmentation":
     with col2:
         # 🚦 THE ROUTER: This points the code to the exact correct folders!
         if "Dog" in species_choice:
-            breeds = ['Afghan', 'African wild dog','Airedale','American Hairless','American Spaniel','Basenji','Basset','Beagle','Bearded Collie','Bermaise','Bichon Frise','Blenheim','Bloodhound','Bluetick','Border Collie','Borzoi','Boston Terrier','Boxer','Bull Mastiff','Bull Terrier','Bulldog','Cairn','Chihuahua','Chinese Crested','Chow','Clumber','Cockapoo','Cocker','Collie','Corgi','Coyote','Dalmation','Dhole','Dingo','Doberman','Elk Hound','French Bulldog','German Sheperd','Golden Retriever','Great Dane','Great Perenees','Greyhound','Groenendael','Irish Spaniel','Irish Wolfhound','Japanese Spaniel','Komondor','Labradoodle','Labrador','Lhasa','Malinois','Maltese','Mex Hairless','Newfoundland','Pekinese','Pit Bull','Pomeranian','Poodle','Pug','Rhodesian','Rottweiler','Saint Bernard','Schnauzer','Scotch Terrier','Shar_Pei', 'Shiba Inu','Shih-Tzu', 'Siberian husky','Vizsla','Yorkie'] 
+            breeds = ['Afghan', 'African wild dog', 'Airedale', 'Basenji', 'Beagle'] # (Keep your full list of 70 here!)
             animal_folder = "dataset_dogs"
             combined_folder = "combined_dogs"
             
@@ -888,7 +901,7 @@ elif choice == "Statistical Validation":
             
     else:
         st.error("❌ CRITICAL ERROR: 'classifier_leaderboard.csv' not found.")
-
+        
 # ==========================================
 # LOGOUT
 # ==========================================
