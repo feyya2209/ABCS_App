@@ -18,9 +18,10 @@ import random
 import torchvision.transforms as T
 from skimage.metrics import structural_similarity as ssim
 
-# 🟢 Add @st.cache_resource so the model stays in memory and doesn't reload!
-@st.cache_resource4
 MODEL_PATH = 'resnet_cat67_original.pth'
+# 🟢 Add @st.cache_resource so the model stays in memory and doesn't reload!
+@st.cache_resource
+
 def load_resnet_model(species, model_path):
     model = models.resnet50(weights=None)
     num_ftrs = model.fc.in_features
