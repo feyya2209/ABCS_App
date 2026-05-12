@@ -244,7 +244,7 @@ def load_model(deployed_model_name="ResNet50 (Deep Learning)"):
             model.fc = nn.Linear(num_ftrs, len(CLASS_NAMES))
             
             # loads newly trained brain!
-            model.load_state_dict(torch.load('resnet_abcs_final.pth', map_location=torch.device('cpu')))
+            model.load_state_dict(torch.load('resnet_cat67_original.pth', map_location=torch.device('cpu')))
             
             model.eval()
             return model, "PyTorch"
